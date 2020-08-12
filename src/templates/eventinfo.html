@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>Happening Free - {{ event.name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/backdrop.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/final.css' %}">
+
+
+{% endblock head %}
+
+{% block body %}
+<br>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="btn btn-danger" href="{% url 'events:events-home' %}">Home</a>&nbsp; &nbsp;
+        </nav>
+
+        <br>
+        <section class="section-buy-info">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="image-container shadow">
+                        <img src="{{ event.poster.url }}" class="buy-image" alt="machine">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-container shadow">
+                        <h2><strong> {{ event.name }}</strong></h2>
+                    <div class="table-data">
+                            <table class="table">
+                                <tbody>
+                                    <tr style="font-size: 17px;">
+                                    <th scope="row">Organizer: </th>
+                                    <td>{{ event.organizer.first_name }} {{ event.organizer.last_name }}</td>
+                                    </tr>
+                                    <tr style="font-size: 17px;">
+                                    <th scope="row">Contact: </th>
+                                    <td>+91 {{ event.contact_number }}</td>
+                                    </tr>
+                                    <tr style="font-size: 17px;">
+                                    <th scope="row">Date: </th>
+                                    <td> {{ event.event_date }}</td>
+                                    </tr>
+                                    <tr style="font-size: 17px;">
+                                    <th scope="row">Address: </th>
+                                    <td> {{ event.address }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                    {% if request.user.is_authenticated %}
+                        {% if event.organizer == request.user %}
+                            <center><button type="button" class="btn btn-primary" disabled>Owner</button></center>
+                        {%else%}
+                            {% if present %}
+                                <center><button type="button" class="btn btn-primary" disabled>Joined</button></center>
+                            {% else %}
+                                <center><a class="btn btn-danger" href="{% url 'events:events-eventjoin' event.id %}" style="align:right;">Join</a><center>                  
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                         <center><a class="btn btn-danger" href="{% url 'events:events-eventjoin' event.id %}" style="align:right;">Login To Join</a><center>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <div class="product-details-container shadow">
+                        <h5 class="product-details"><strong>Event Information</strong></h5>
+                        <hr>
+                        <h6>{{ event.description }}</h6>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+    <footer class="page-footer font-small mdb-color lighten-3 pt-4">
+        <small><div class="footer-copyright text-center py-3">© Copyright: The content and images used on this site are copyright protected and copyrights vests with the respective owners. The usage of the content and images on this website is intended to promote the works and no endorsement of the artist shall be implied. Unauthorized use is prohibited and punishable by law.
+        </div></small>
+    </footer> 
+
+    </div>
+
+            {% block js %}
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script src="{% static 'js/bootstrap.js' %}"></script>
+            {% endblock js %}
+{% endblock body %}

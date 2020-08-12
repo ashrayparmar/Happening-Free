@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/backdrop.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+
+{% endblock head %}
+
+{% block body %}
+<br>
+    <div class="container">
+    <a href="{% url 'events:events-home' %}" class="btn btn-danger">Home</a>
+    <a href="{% url 'events:events-myevents' %}" class="btn btn-danger">Your Events</a>
+    </div>
+    <br>
+    <div class="container">
+        {% if request.user == event.organizer %}
+
+        <center><h1 class="display-4">Participants List</h1></center>
+        <br>
+        
+            <ul>
+                {% for part in participants %}
+                    <h3><li>{{ part }}</li></h3>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <center><h1 class="display-4">Sorry. you didn't organize this event.</h1></center>
+        {% endif %}
+    </div>   
+    
+{% endblock body %}

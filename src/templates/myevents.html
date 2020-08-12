@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/backdrop.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+
+{% endblock head %}
+
+{% block body %}
+    <div class="container">
+    <br>
+    <a href="{% url 'events:events-home' %}" class="btn btn-danger">Home</a>
+    <a href="{% url 'events:events-profile' %}" class="btn btn-danger">Profile</a>
+        <section class="section-buy-sell" style="padding: 2% 5% 10% 5%;">
+            <div class="row mt-3">
+                {% for event in events %}
+                    {% if event.is_active %}
+                        <div class="col-md-3" style="margin-top:20px; margin-right: 80px;">
+                            <div class="card buy-card shadow" style="width: 18rem; ">
+                                <img src="{{ event.poster.url }}" class="card-img-top" style="height: 350px;">
+                                <div class="card-body">
+                                    <center><h5 class="card-title"><strong> {{ event.name }} </strong></h5></center>
+                                    <a href="{% url 'events:events-eventdelete' event.id %}"><button class="btn btn-outline-info">Delete</button></a>
+                                    <a href="{% url 'events:events-participants' event.id %}"><button class="btn btn-outline-info">Participants</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                   
+                {% endfor %}
+            </div>
+                    
+        </section>
+    </div>
+
+{% endblock body %} 

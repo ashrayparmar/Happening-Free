@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/queries.css' %}">
+    <title>Happening Free - {{ title }}</title>
+{% endblock head %}
+
+{% block body %}
+    <header>
+        <nav>
+            <div class="row">
+                <img src="{% static 'css/img/logo.png' %}" class="logo">
+                <ul class="main-nav">
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'events:events-profile' %}">Profile</a></li>
+                        <li><a href="{% url 'events:events-addevent' %}">Organize</a></li>
+                        <li><a href="{% url 'events:events-logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'events:events-login' %}">Log in</a></li>
+                        <li><a href="{% url 'events:events-signup' %}">Sign up</a></li>
+                    {% endif %}
+                </ul>
+                </div>
+        </nav> 
+        <div class="blog-text-box">
+            <h1>Happening things around you is waiting.</h1> <br>
+            <a class="btn btn-full" href="{% url 'events:events-allevents' %}">Nearby events</a>
+            {% if request.user.is_authenticated %}
+                <a class="btn btn-full" href="{% url 'events:events-recommended' %}">Recommended events</a>
+            {% endif %} 
+        </div>
+    </header>
+
+            <section class="section-steps" id="works">
+                <div class="row">
+                    <h2>How it works &mdash; Simple as 1, 2, 3</h2>
+                </div>
+                <div class="row">
+                    <div class="col span-1-of-2 steps-box">
+                        <img src="{% static 'css/img/mobile.jpg' %}" alt="Omnifood app on iPhone" class="app-screen js--wp-2">
+                    </div>
+                    <div class="col span-1-of-2 steps-box">
+                        <div class="works-step clearfix">
+                            <div>1</div>
+                            <p>Choose the Event as per your interest.</p>
+                        </div>
+                        <div class="works-step clearfix">
+                            <div>2</div>
+                            <p>Contact with the organiser and ask for details.</p>
+                        </div>
+                        <div class="works-step clearfix">
+                            <div>3</div>
+                            <p>Set as a confirmation if you're willing to attend.</p>
+                        </div>
+                        
+                        <a href="{% url 'events:events-inprogress' %}" class="btn-app"><img src="{% static 'css/img/download-app.svg' %}" alt="App Store Button"></a>
+                        <a href="{% url 'events:events-inprogress' %}" class="btn-app"><img src="{% static 'css/img/download-app-android.png' %}" alt="Play Store Button"></a>
+                    </div>
+                </div>
+            </section>
+            </body>
+
+            <section class="section-features js--section-features" id="features">
+            <div class="row">
+                <h2>Meet new people &mdash; Meet new groups</h2>
+                <p class="long-copy">
+                    Hello, we're happening free, your new premium place to hangout and make new friends. We know you're always busy. No me time for yourself. So let us take care of that, we're really good at it, we promise!
+                </p>
+            </div>
+            <br>
+            <div class="row js--wp-1">
+                <div class="col span-1-of-4 box">
+                    <center><i class="ion-ios-infinite-outline icon-big"></i>
+                    <h3>Up to 365 days/year</h3></center>
+                    <p>
+                        Never feel bored again! We really mean that. Our plans include up to 365 days/year. You can also choose to plan according to you, more flexible if that's your style.
+                    </p>
+                </div>
+                <div class="col span-1-of-4 box">
+                    <center><i class="ion-ios-stopwatch-outline icon-big"></i>
+                    <h3>Plan in a minute</h3></center>
+                    <p>
+                        You're only minutes away to kill your boredom and organize a house party at your place and order super healthy meals right to your home. We try to make your weekend much more happening.
+                    </p>
+                </div>
+                <div class="col span-1-of-4 box">
+                    <center><i class="ion-ios-nutrition-outline icon-big"></i>
+                    <h3>Let's cook together</h3></center>
+                    <p>
+                        Let's bring fresh vegetables, organic and plan for a picnic. Plan a trekking to a fort and cook with unknowns. Good for enjoying peaceful environment!
+                    </p>
+                </div>
+                <div class="col span-1-of-4 box">
+                    <center><i class="ion-ios-cart-outline icon-big"></i>
+                    <h3>Shop together</h3></center>
+                    <p>
+                        We don't limit your creativity, which means you can plan to shop together and organize an event to shop. No one for a movie? Organize a event? It's up to you!
+                    </p>
+                </div>
+            </div>   
+        </section>
+
+
+        <section class="section-testimonials">
+            <div class="row">
+                <h2>Our customers reviews are important</h2>
+            </div>
+            <div class="row">
+                <div class="col span-1-of-3">
+                    <blockquote>
+                    <center><cite><img src="{% static 'img/customer-1.jpg' %}" style = "width: 200px; border-radius: 30%;" alt="Customer 3 photo"></cite></center><br>
+                        Happening Free is just awesome! I recently moved to Pune and this website helped me making new friends and exploring this place, so Happening Free is a life-saver. Now that I got used to it, I couldn't live without planning a event in weekend.
+                    </blockquote>
+                </div>
+                <div class="col span-1-of-3">
+                    <blockquote>
+                    <center><cite><img src="{% static 'img/customer-2.jpg' %}" style = "width: 200px; border-radius: 30%;" alt="Customer 3 photo"></cite></center><br>
+                       Inexpensive, healthy and good quality events, right in your place. We have lots of choice to hangout but this media helps in improvising my introvert behvaiour. Me and my family are so in love!
+                    </blockquote>
+                </div>
+                <div class="col span-1-of-3">
+                    <blockquote>
+                    <center><cite><img src="{% static 'img/man1.jpg' %}" style = "width: 200px; height: 100px; border-radius: 30%;" alt="Customer 3 photo"></cite></center><br>
+I was looking for a quick and easy place to find in Delhi to hangout. I tried a lot of them and ended up with Happening Free. Best place to organize event in Delhi. Keep up the great work!
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+
+
+            <section class="section-form">
+                <div class="row">
+                    <h2>We're happy to hear from you</h2>
+                </div>
+                <div class="row">
+                    <form method="post" action="#" class="contact-form">
+                        <div class="row">
+                            <div class="col span-1-of-3">
+                                <label for="name">Name</label>
+                            </div>
+                            <div class="col span-2-of-3">
+                                <input type="text" name="name" id="name" placeholder="Your name" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col span-1-of-3">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="col span-2-of-3">
+                                <input type="email" name="email" id="email" placeholder="Your email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col span-1-of-3">
+                                <label for="find-us">How did you find us?</label>
+                            </div>
+                            <div class="col span-2-of-3">
+                                <select name="find-us" id="find-us">
+                                    <option value="friends" selected>Friends</option>
+                                    <option value="search">Search engine</option>
+                                    <option value="ad">Advertisement</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col span-1-of-3">
+                                <label>Newsletter?</label>
+                            </div>
+                            <div class="col span-2-of-3">
+                                <input type="checkbox" name="news" id="news" checked> Yes, please
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col span-1-of-3">
+                                <label>Drop us a line</label>
+                            </div>
+                            <div class="col span-2-of-3">
+                                <textarea name="message" placeholder="Your message"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col span-1-of-3">
+                                <label>&nbsp;</label>
+                            </div>
+                            <br>
+                            <a href="{% url 'events:events-inprogress' %}" class=" btn btn-danger" style="background-color: grey;">Submit</a>
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+            </section>
+        <!--
+        
+        
+            <section class="section-plans js--section-plans" id="plans">
+                <div class="row">
+                    <h2>Events near you</h2>
+                </div>
+                <div class="row">
+    
+                </div>
+            </section>
+        -->
+
+            <footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-info">
+                    <h1>Happening Free</h1>
+                    <p>The content and images used on this site are copyright protected and copyrights vests with the respective owners. The usage of the content and images on this website is intended to promote the works and no endorsement of the artist shall be implied. Unauthorized use is prohibited and punishable by law.</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h4>Contact Us</h4>
+                    <p>
+                        Loni Kalbhor<br>
+                        Pune, Maharashtra<br>
+                        412201<br>
+                        <strong>Phone:</strong> +91 99999 88888<br>
+                        <strong>Email:</strong> happeningfree@example.com<br>
+                    </p>
+                    <br>
+                    <div class="social-links">
+                        <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong>Happening Free</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=TheEvent
+            -->
+            Designed by ASHRAY PARMAR </a>
+        </div>
+    </div>
+</footer>
+
+{% endblock body %}
